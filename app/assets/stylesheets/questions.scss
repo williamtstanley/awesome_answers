@@ -1,3 +1,9 @@
 .field_with_errors input, .field_with_errors textarea  {
     border: 2px solid red;
 }
+
+body {
+    background: url(image-path('shattered.png'));
+    // background-size: 100%;
+    // background-repeat: no-repeat;
+}
