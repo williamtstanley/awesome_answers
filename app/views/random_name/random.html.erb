@@ -1,0 +1,8 @@
+<h1>Select a random name!</h1>
+<%= form_tag random_name_path do %>
+    <%= text_area_tag :names, @names, rows: 8, cols:50, placeholder: "Enter list of comma seperated names" %>
+    <%= submit_tag "Pick Winner!" %>
+
+<% end %>
+
+<h1>The Winner is <%= @result %></h1>

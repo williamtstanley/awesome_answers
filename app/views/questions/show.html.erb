@@ -1,0 +1,38 @@
+<div class="question-container">
+    <h1><%= @question.title.titleize %></h1>
+
+    <p>
+        <%= @question.body %>
+    </p>
+
+    <p>Views: <%= @question.view_count %></p>
+    <p>Created by: <%= @question.user.full_name if @question.user %>
+    <div class="links">
+        <%= link_to "Edit", edit_question_path(@question) %>
+        |
+        <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"} %>
+    </div>
+</div>
+
+<h3>Create Answer</h3>
+<div class="form-container">
+    <div class="errors">
+        <%= @answer.errors.full_messages.join(", ") %>
+    </div>
+<%= form_for [@question, @answer] do |f| %>
+<div class="input-container">
+    <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full answer text here"}  %>
+</div>
+<%= f.submit %>
+<% end %>
+
+<h2>Answers</h2>
+<% @question.new_first_answers.each do |ans| %>
+    <div class="answer">
+        <%= ans.body %>
+        <%= link_to "Delete", question_answer_path(@question, ans),
+        method: :delete,
+        data: {confirm: "Are you sure?"}%>
+        <hr>
+    </div>
+<% end %>

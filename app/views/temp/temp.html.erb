@@ -1,0 +1,19 @@
+<h1>Temp Converter</h1>
+<h2>&deg;celsius <=> &deg;fahrenheit</h2>
+
+<%= form_tag temp_path do %>
+    <%= text_field_tag :temp, @temp, {placeholder: "enter a number"}%>
+    <br>
+    <span> celsius </span><%= radio_button_tag :type, "celsius", (checked = true if @type == "celsius") %>
+    <span> fahrenheit</span><%= radio_button_tag :type, "fahrenheit", (checked = true if @type == "fahrenheit") %>
+    <br>
+    <%= submit_tag "Convert" %>
+
+<% end %>
+
+
+<%if @error %>
+    <span class="error"><%= @error %></span>
+<% else %>
+    <h1><%= @converted %></h1>
+<% end %>

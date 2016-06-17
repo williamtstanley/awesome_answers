@@ -1,0 +1,22 @@
+<%# form_ for is a rails_helper that expects to be given an ActiveRecord object as a first argument. if the object is not persisted it will automatically set the action for the form to the associated controller create action. In this case it will make the action go to 'questions_path' and it will automatically set the method to "POST" if @question has any attributes set it will populate the corresponding field with that data  %>
+<div class="form-container">
+    <div class="errors">
+        <%= @question.errors.full_messages.join(", ") %>
+    </div>
+
+<%= form_for @question do |f| %>
+    <div class="input-container">
+    <%= f.label :title  %>
+    <%= f.text_field :title, {placeholder: "Question Title"}  %>
+    </div>
+        <%= f.label :body%>
+    <div class="input-container">
+        <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full question text here"}  %>
+    </div>
+    <div class="drop_down">
+        <%= f.collection_select :category_id, Category.order(created_at: :desc), :id, :title, {include_blank: 'Select a Category'} %>
+    </div>
+    <%= f.submit %>
+<% end %>
+
+</div>

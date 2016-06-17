@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="nav-bar">
+        <nav class="left-nav">
+            <%= link_to "Home", root_path, {class: "nav"} %>
+            |
+            <%= link_to "All Questions", questions_path %>
+        </nav>
+        <nav class="right-nav">
+            <% if user_signed_in? %>
+                Hello, <%= current_user.first_name %>
+                |
+                <%= link_to "Sign Out", sessions_path, method: :delete %>
+            <% else %>
+                <%= link_to "Sign Up", new_user_path %>
+                |
+                <%= link_to "Sign In", new_session_path %>
+            <% end %>
+        </nav>
+    </div>
+
+    <% if flash[:notice] %>
+        <div class="flash flash-notice">
+            <%= flash[:notice] %>
+        </div>
+    <% elsif flash[:alert] %>
+        <div class="flash flash-alert">
+            <%= flash[:alert] %>
+        </div>
+    <% end %>
+
+<div class="content">
+    <div class="container">
+        <%= yield %>
+    </div>
+</div>
+
+
+</body>
+</html>
