@@ -7,25 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="nav-bar">
-        <nav class="left-nav">
-            <%= link_to "Home", root_path, {class: "nav"} %>
-            |
-            <%= link_to "All Questions", questions_path %>
-        </nav>
-        <nav class="right-nav">
-            <% if user_signed_in? %>
-                Hello, <%= current_user.first_name %>
-                |
-                <%= link_to "Sign Out", sessions_path, method: :delete %>
-            <% else %>
-                <%= link_to "Sign Up", new_user_path %>
-                |
-                <%= link_to "Sign In", new_session_path %>
-            <% end %>
-        </nav>
-    </div>
-
+<%= render "/layouts/navbar" %>
     <% if flash[:notice] %>
         <div class="flash flash-notice">
             <%= flash[:notice] %>
