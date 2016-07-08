@@ -1,0 +1,16 @@
+<div id="votes">
+  <% if question.voted_up_by?(current_user) %>
+    <%# case when upvote %>
+    <div class="vote-link"><%= link_to fa_icon("caret-up"), question_vote_path(question, current_user_vote), method: :delete, remote: true %></div>
+    <div class="vote-word"><%= question.vote_sum %></div>
+    <div class="vote-link"><%= link_to fa_icon("caret-down"), question_vote_path(question, question.vote_for(current_user), vote: {is_up: false}), method: :patch, remote: true %></div>
+  <% elsif question.voted_down_by?(current_user) %>
+    <div class="vote-link"><%= link_to fa_icon("caret-up"), question_vote_path(question, current_user_vote, vote: {is_up: true}), method: :patch, remote: true %></div>
+    <div class="vote-word"><%= question.vote_sum %></div>
+    <div class="vote-link"><%= link_to link_to fa_icon("caret-down"), question_vote_path(question, question.vote_for(current_user)), method: :delete, remote: true %></div>
+  <% else %>
+    <div class="vote-link"><%= link_to fa_icon("caret-up"), question_votes_path(question, vote: {is_up: true}), method: :post, remote: true %></div>
+    <div class="vote-word"><%= question.vote_sum %></div>
+    <div class="vote-link"><%= link_to link_to fa_icon("caret-down"), question_votes_path(question, vote: {is_up: false}), method: :post, remote: true %></div>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<% if @vote %>
+    $('#votes').html("<%= j(render('/questions/vote', question: current_question, current_user_vote: @vote)) %>")
+<% else %>
+    alert('an error has occured please refresh the page')
+<% end %>

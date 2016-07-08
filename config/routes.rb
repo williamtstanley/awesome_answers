@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+
     resources :sessions, only: [:new, :create] do
         delete :destroy, on: :collection
     end
@@ -16,7 +19,10 @@ Rails.application.routes.draw do
         #this will make all the answers routes nested within 'questions' which means all the answers routes will be
         # prepended with '/questions/:question_id/'
         resources :answers, only: [:create, :destroy]
+        resources :likes, only: [:create, :destroy]
+        resources :votes, only: [:create, :update, :destroy]
     end
+    resources :likes, only: [:index]
 
     #index page
     root "home#index"

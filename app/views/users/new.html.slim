@@ -1,0 +1,15 @@
+.col-md-3
+
+.col-md-6
+  h1 Create a new account
+  = @user.errors.full_messages.join(", ") 
+  = simple_form_for @user do |f| 
+    = f.input :first_name, placeholder: "first name" 
+    = f.input :last_name, placeholder: "last name" 
+    = f.input :email, placeholder: "email address" 
+    = f.input :password, placeholder: "password" 
+    = f.input :password_confirmation, placeholder: "password confirmation" 
+    = f.button :submit,  class: "btn btn-primary"
+    
+.col-md-3
+

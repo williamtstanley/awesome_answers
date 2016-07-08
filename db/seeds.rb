@@ -8,19 +8,19 @@
 #
 # puts Cowsay.say "Generated 300 users!"
 
-300.times do
-  q = Question.create title:      Faker::Company.bs,
-                      body:       Faker::Hipster.paragraph,
-                      view_count: rand(100)
-  5.times { q.answers.create body: Faker::ChuckNorris.fact } if q.persisted?
-end
-
-
-
-["Sports", "Cats", "Technology", "News", "Gaming", "Parenting"].each do |cat|
-    Category.create title: cat
-end
+# 300.times do
+#   q = Question.create title:      Faker::Company.bs,
+#                       body:       Faker::Hipster.paragraph,
+#                       view_count: rand(100)
+#   5.times { q.answers.create body: Faker::ChuckNorris.fact } if q.persisted?
+# end
+#
+#
+#
+# ["Sports", "Cats", "Technology", "News", "Gaming", "Parenting"].each do |cat|
+#     Category.create title: cat
+# end
 
 # puts Cowsay.say "Generated 300 questions!"
-
+30.times {Tag.create(title: Faker::Hacker.adjective)}
 

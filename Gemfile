@@ -1,6 +1,26 @@
 source 'https://rubygems.org'
+# pagination
+gem 'kaminari'
+# user auth
+gem 'cancancan', '~> 1.10'
+# slim html pages
+gem 'slim'
+# styling
+gem "font-awesome-rails"
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+gem 'bootstrap_form'
+# forms made easy
+gem 'simple_form'
 
 
+#pretty URL's
+gem 'friendly_id'
+
+
+# mail
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -16,6 +36,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -26,6 +48,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# allow remote request
+gem 'rack-cors', require: 'rack/cors'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -46,7 +70,9 @@ group :development do
   gem 'interactive_editor'
   gem 'hirb'
   gem 'rails-erd'
-
+  gem 'pry'
+  gem 'pry-rails'
+  gem "letter_opener", :group => :development
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 

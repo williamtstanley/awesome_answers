@@ -1,0 +1,9 @@
+<div class="errors">
+  <%= @answer.errors.full_messages.join(", ") %>
+</div>
+<%= simple_form_for [@question, @answer], remote: true do |f| %>
+<div class="input-container">
+    <%= f.input :body, {rows: 5, cols: 100, placeholder: "Enter the full answer text here"}  %>
+</div>
+<%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

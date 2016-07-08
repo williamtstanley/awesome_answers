@@ -1,0 +1,15 @@
+
+Hello, <%= @owner.full_name %>
+
+
+You got an answer to a question:
+
+Question title: <%= @question.title %>
+
+Answer: <%= @answer.body %>
+
+Visit your question by clicking
+Visit your question by clicking <%= question_url(@question) %>
+
+Regards,
+Awesome Answers Team

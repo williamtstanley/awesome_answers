@@ -5,6 +5,18 @@ class Question < ActiveRecord::Base
     # the dependent option takes values like 'destroy' and 'nullify'. Destroy will make rails automatically delete associated
     # answers before deleting the question, nullify will make rails turn the 'question_id' values to NULL before deleting the
     # question
+
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings
+
+    has_many :votes, dependent: :destroy
+    has_many :voting_users, through: :votes, source: :user
+
+    # MANY TO MANY
+    has_many :likes, dependent: :destroy
+    has_many :liking_users, through: :likes, source: :user
+
+    # OTHER REFERENCES
     has_many :answers, dependent: :destroy
     belongs_to :category
     belongs_to :user
@@ -20,6 +32,9 @@ class Question < ActiveRecord::Base
 
     # VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     # validates :email,
+    extend FriendlyId
+    friendly_id :title, use: [:slugged, :finders, :history]
+
 
     validate :no_monkey
 
@@ -46,6 +61,45 @@ class Question < ActiveRecord::Base
     def new_first_answers
         answers.order(created_at: :desc)
     end
+
+    def liked_by?(user)
+      likes.exists?(user: user)
+    end
+
+    def like_for(user)
+      likes.find_by_user_id(user)
+    end
+
+    def voted_by?(user)
+      votes.exists?(user: user)
+    end
+
+    def vote_for(user)
+      votes.find_by_user_id(user)
+    end
+
+    def voted_up_by?(user)
+      voted_by?(user) && vote_for(user).is_up?
+    end
+    def voted_down_by?(user)
+      voted_by?(user) && !vote_for(user).is_up?
+    end
+
+    def up_votes
+      votes.where(is_up: true).count
+    end
+
+    def down_votes
+      votes.where(is_up: false).count
+    end
+
+    def vote_sum
+      up_votes - down_votes
+    end
+    
+    #def to_param
+    #   "#{id}-#{title}".parameterize
+    # end
 
     private
 

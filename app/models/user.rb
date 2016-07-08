@@ -6,8 +6,15 @@ class User < ActiveRecord::Base
     # 4 - it will add handy methods for us to automatically hash the password to the password_digest field
     # and compare a given password
     has_secure_password
+    has_many :votes, dependent: :destroy
+    has_many :voted_questions, through: :votes, source: :question
+    # MANY TO MANY
+    has_many :likes, dependent: :destroy
+    has_many :liked_questions, through: :likes, source: :question
 
+    # REFERENCES ONE TO MANY
     has_many :questions, dependent: :nullify
+    has_many :answers, dependent: :nullify
 
     validates :first_name, presence: true
     validates :last_name, presence: true

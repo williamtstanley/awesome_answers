@@ -5,34 +5,43 @@
         <%= @question.body %>
     </p>
 
+
     <p>Views: <%= @question.view_count %></p>
+    <p>
+      Tags: <%= @question.tags.map {|t| t.title}.join(", ") %>
+    </p>
     <p>Created by: <%= @question.user.full_name if @question.user %>
     <div class="links">
+      <% if @question.liked_by?(current_user) %>
+        <%= link_to fa_icon("thumbs-down"), question_like_path(@question, @question.like_for(current_user)), method: :delete, class: "like-icon"%>
+      <% else %>
+        <%= link_to fa_icon("thumbs-up"), question_likes_path(@question), method: :post, class: "like-icon"%>
+      <% end %>
+      <% if can? :manage, @question %>
+        |
         <%= link_to "Edit", edit_question_path(@question) %>
         |
         <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"} %>
-    </div>
+      <% end %>
+  </div>
+<br>
+
+  <!-- VOTES LINK LOGIC -->
+
+<%= render "/questions/vote", question: @question %>
+
+
 </div>
 
 <h3>Create Answer</h3>
-<div class="form-container">
-    <div class="errors">
-        <%= @answer.errors.full_messages.join(", ") %>
-    </div>
-<%= form_for [@question, @answer] do |f| %>
-<div class="input-container">
-    <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full answer text here"}  %>
+<div id="answer-form">
+  <%= render "/answers/form" %>
 </div>
-<%= f.submit %>
-<% end %>
 
 <h2>Answers</h2>
+<div id="answers">
 <% @question.new_first_answers.each do |ans| %>
-    <div class="answer">
-        <%= ans.body %>
-        <%= link_to "Delete", question_answer_path(@question, ans),
-        method: :delete,
-        data: {confirm: "Are you sure?"}%>
-        <hr>
-    </div>
+  <%= render "/answers/answer", answer: ans %>
 <% end %>
+</div>
+

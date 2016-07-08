@@ -1,0 +1,9 @@
+<h1>Questions you like</h1>
+
+<% @questions.each do |question| %>
+  <%= link_to question.title, question %>
+  <p>
+      <%= question.body %>
+  </p>
+  <hr>
+<% end %>
