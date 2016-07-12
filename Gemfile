@@ -17,7 +17,12 @@ gem 'simple_form'
 #pretty URL's
 gem 'friendly_id'
 
-
+#File attachments handler
+gem 'carrierwave'
+#image manipulation handler
+gem 'mini_magick'
+#reduce log messages
+gem 'quiet_assets'
 # mail
 gem 'delayed_job_active_record'
 gem "delayed_job_web"

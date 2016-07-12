@@ -4,6 +4,7 @@
 <%= simple_form_for @question do |f| %>
     <%= f.input :title, {placeholder: "Question Title"}  %>
     <%= f.input :body, {rows: 10, cols: 100, placeholder: "Enter the full question text here"}  %>
+    <%= f.input :image %>
     <%= f.association :tags, as: :check_boxes %>
     <%= f.association :category %>
   <div class="form-group">

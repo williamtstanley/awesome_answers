@@ -1,0 +1,62 @@
+Amazon s3
+
+sign up for account!
+
+Storage and Content Delivery
+s3
+
+abstract storage outside of application
+
+name -> security credentials
+
+access keys -> create new access key -> copy key
+
+=========
+rails app
+
+config -> app_keys.rb
+
+ENV['AWS_ACCESS_KEY_ID'] = 'PUT ACCESS ID HERE'
+ENV['AWS_SECRET_ACCESS_KEY'] = 'PUT SECRET KEY HERE'
+
+=========
+
+install gem 'fog'
+
+
+=========
+
+Amazon:
+
+s3 -> create bucket -> select region -> Name bucket -> create
+
+
+note bucket name
+
+=========
+
+Rails:
+
+initializer config: -> setup_fog.rb
+
+CarrierWave.configure do |config|
+  config.fog_credentials = {
+    provider:              'AWS',  # required
+    aws_access_key_id:     'AWS_ACCESS_KEY_ID',  # required
+    aws_secret_access_key: 'AWS_SECRET_KEY',  # required
+    region:                '**BUCKET REGION HERE**', # optional, defaults to 'us-east-1'
+  }
+  config.fog_directory  = 'name_of_directory'  # required
+  config.fog_public     = false   # optional, defaults to true
+  config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" } # optional, defaults to {}
+end
+
+=====
+uploader config
+
+uncomment :fog
+comment :local storage
+
+restart all the things
+
+

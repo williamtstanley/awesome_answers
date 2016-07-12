@@ -4,7 +4,7 @@
     <p>
         <%= @question.body %>
     </p>
-
+        <%= image_tag @question.image.url(:medium) %>
 
     <p>Views: <%= @question.view_count %></p>
     <p>

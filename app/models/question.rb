@@ -34,7 +34,8 @@ class Question < ActiveRecord::Base
     # validates :email,
     extend FriendlyId
     friendly_id :title, use: [:slugged, :finders, :history]
-
+    
+    mount_uploader :image, ImageUploader
 
     validate :no_monkey
 
